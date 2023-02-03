@@ -30,6 +30,56 @@ class Category extends Resource
     }
 
     /**
+     * Get the displayable singular label of the resource in Genitive case.
+     *
+     * @return string
+     */
+    public static function genitiveLabel()
+    {
+        return __('Категории');
+    }
+    
+    /**
+     * Get the displayable singular label of the resource in Accusative case.
+     *
+     * @return string
+     */
+    public static function accusativeLabel()
+    {
+        return __('Категорию');
+    }
+    
+    /**
+     * Get the displayable plural label of the resource in Genitive case.
+     *
+     * @return string
+     */
+    public static function genitivePluralLabel()
+    {
+        return __('Категорий');
+    }
+    
+    /**
+     * Get the text for the create resource button.
+     *
+     * @return string|null
+     */
+    public static function createButtonLabel()
+    {
+        return __('Создать категорию');
+    }
+
+    /**
+     * Get the text for the update resource button.
+     *
+     * @return string|null
+     */
+    public static function updateButtonLabel()
+    {
+        return __('Обновить категорию');
+    }
+
+    /**
      * The model the resource corresponds to.
      *
      * @var class-string<\App\Models\Category>
@@ -41,7 +91,7 @@ class Category extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -49,7 +99,7 @@ class Category extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name'
     ];
 
     /**
@@ -62,8 +112,8 @@ class Category extends Resource
     {
         return [
             ID::make()->sortable(),
-            
-            Text::make('Name')
+
+            Text::make(__('Название'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 

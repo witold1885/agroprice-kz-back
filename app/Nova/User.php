@@ -33,6 +33,56 @@ class User extends Resource
     }
 
     /**
+     * Get the displayable singular label of the resource in Genitive case.
+     *
+     * @return string
+     */
+    public static function genitiveLabel()
+    {
+        return __('Пользователя');
+    }
+    
+    /**
+     * Get the displayable singular label of the resource in Accusative case.
+     *
+     * @return string
+     */
+    public static function accusativeLabel()
+    {
+        return __('Пользователя');
+    }
+    
+    /**
+     * Get the displayable plural label of the resource in Genitive case.
+     *
+     * @return string
+     */
+    public static function genitivePluralLabel()
+    {
+        return __('Пользователей');
+    }
+    
+    /**
+     * Get the text for the create resource button.
+     *
+     * @return string|null
+     */
+    public static function createButtonLabel()
+    {
+        return __('Создать пользователя');
+    }
+
+    /**
+     * Get the text for the update resource button.
+     *
+     * @return string|null
+     */
+    public static function updateButtonLabel()
+    {
+        return __('Обновить пользователя');
+    }
+
+    /**
      * The model the resource corresponds to.
      *
      * @var class-string<\App\Models\User>
@@ -66,19 +116,19 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
+            Gravatar::make(__('Аватар'))->maxWidth(50),
 
-            Text::make('Name')
+            Text::make(__('Имя'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make('Email')
+            Text::make(__('Email'), 'email')
                 ->sortable()
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Password::make('Password')
+            Password::make(__('Пароль'), 'password')
                 ->onlyOnForms()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
