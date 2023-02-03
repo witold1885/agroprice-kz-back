@@ -4,10 +4,31 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Category extends Resource
 {
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return __('Категории');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel()
+    {
+        return __('Категория');
+    }
+
     /**
      * The model the resource corresponds to.
      *
@@ -41,6 +62,11 @@ class Category extends Resource
     {
         return [
             ID::make()->sortable(),
+            
+            Text::make('Name')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
         ];
     }
 
