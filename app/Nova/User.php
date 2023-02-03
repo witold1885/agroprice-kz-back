@@ -13,6 +13,26 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 class User extends Resource
 {
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return __('Пользователи');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel()
+    {
+        return __('Пользователь');
+    }
+
+    /**
      * The model the resource corresponds to.
      *
      * @var class-string<\App\Models\User>
