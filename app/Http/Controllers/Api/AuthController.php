@@ -23,7 +23,13 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
             // return response()->json($validator->errors(), 422);
-            return ['success' => false, 'message' => $validator->messages()->first()];
+            return ['success' => false, 'error' => $validator->messages()->first()];
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['success' => false, 'error' => 'Пользователь не найден']);
         }
 
         if (! $token = JWTAuth::attempt($validator->validated())) {
